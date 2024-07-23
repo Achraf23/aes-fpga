@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="top_TB_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="top_TB" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="92.399714 us"></ZoomStartTime>
+      <ZoomEndTime time="1,069.399715 us"></ZoomEndTime>
+      <Cursor1Time time="304.399714 us"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="84"></NameColumnWidth>
+      <ValueColumnWidth column_width="66"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="14" />
+   <wvobject type="logic" fp_name="/top_TB/top_TB/tr/transmitter_clk">
+      <obj_property name="ElementShortName">transmitter_clk</obj_property>
+      <obj_property name="ObjectShortName">transmitter_clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_TB/top_TB/tr/reset">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_TB/top_TB/tr/transmit">
+      <obj_property name="ElementShortName">transmit</obj_property>
+      <obj_property name="ObjectShortName">transmit</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_TB/top_TB/tr/data">
+      <obj_property name="ElementShortName">data[7:0]</obj_property>
+      <obj_property name="ObjectShortName">data[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_TB/top_TB/tr/Txd">
+      <obj_property name="ElementShortName">Txd</obj_property>
+      <obj_property name="ObjectShortName">Txd</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_TB/top_TB/tr/bitcounter">
+      <obj_property name="ElementShortName">bitcounter[3:0]</obj_property>
+      <obj_property name="ObjectShortName">bitcounter[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_TB/top_TB/tr/counter">
+      <obj_property name="ElementShortName">counter[13:0]</obj_property>
+      <obj_property name="ObjectShortName">counter[13:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_TB/top_TB/tr/state">
+      <obj_property name="ElementShortName">state</obj_property>
+      <obj_property name="ObjectShortName">state</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_TB/top_TB/tr/nextstate">
+      <obj_property name="ElementShortName">nextstate</obj_property>
+      <obj_property name="ObjectShortName">nextstate</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_TB/top_TB/tr/rightshiftreg">
+      <obj_property name="ElementShortName">rightshiftreg[9:0]</obj_property>
+      <obj_property name="ObjectShortName">rightshiftreg[9:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_TB/top_TB/tr/shift">
+      <obj_property name="ElementShortName">shift</obj_property>
+      <obj_property name="ObjectShortName">shift</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_TB/top_TB/tr/load">
+      <obj_property name="ElementShortName">load</obj_property>
+      <obj_property name="ObjectShortName">load</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_TB/top_TB/tr/clear">
+      <obj_property name="ElementShortName">clear</obj_property>
+      <obj_property name="ObjectShortName">clear</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_TB/top_TB/tr/counter">
+      <obj_property name="ElementShortName">counter[13:0]</obj_property>
+      <obj_property name="ObjectShortName">counter[13:0]</obj_property>
+   </wvobject>
+</wave_config>
