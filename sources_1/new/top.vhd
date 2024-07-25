@@ -4,6 +4,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity top is
     port (
         clk : in STD_LOGIC;
+        in_bit : in std_logic;
         out_bit : out STD_LOGIC
     );
 end top;
@@ -21,74 +22,46 @@ architecture Behavioral of top is
         i_Clk       : in  std_logic;
         i_RX_Serial : in  std_logic;
         o_RX_DV     : out std_logic;
-        o_RX_Byte   : out std_logic_vector(7 downto 0)
+        o_RX_Byte   : out std_logic_vector(7 downto 0);
+        receiving : out std_logic
         );
     end component;
     
-    signal transmit,sim_transmit,r_receiver : STD_LOGIC;
-    signal sim_rst : std_logic;
+    signal sim_transmit,r_receiver : STD_LOGIC;
+    signal sim_rst,end_receive : std_logic;
+    signal transport_data, sim_o_rx_byte :  std_logic_vector(7 downto 0);
     constant c_BIT_PERIOD : time := 104166 ns;
+    signal test_bit : std_logic;
     
-    procedure UART_WRITE_BYTE (
-    i_Data_In       : in  std_logic_vector(7 downto 0);
-    signal o_Serial : out std_logic) is
-  begin
-
-    -- Send Start Bit
-    o_Serial <= '0';
-    wait for c_BIT_PERIOD;
-
-    -- Send Data Byte
-    for ii in 0 to 7 loop
-      o_Serial <= i_Data_In(ii);
-      wait for c_BIT_PERIOD;
-    end loop;  -- ii
-
-    -- Send Stop Bit
-    o_Serial <= '1';
-    wait for c_BIT_PERIOD;
-    
-    sim_transmit <= '1';
-    
-  end UART_WRITE_BYTE;
-
 begin
     tr: transmitter PORT MAP(
        transmitter_clk => clk,
        reset => sim_rst,
        transmit => sim_transmit,
-       data => "00111101",
+       data => transport_data,
        Txd => out_bit
     );
     
     rec: receiver PORT MAP(
        i_Clk => clk,
-       i_RX_Serial => r_receiver,
-       o_RX_DV => open,
-       o_RX_Byte => open
+       i_RX_Serial => in_bit,
+       o_RX_DV => end_receive,
+       o_RX_Byte => sim_o_rx_byte
     );
     
-    UART_WRITE_BYTE(X"37", r_receiver);
-
+    process begin
+        wait until rising_edge(clk) and end_receive = '1';
+        -- we have finished receiving a whole byte
+        -- now we send it
+        transport_data <= sim_o_rx_byte;
+        sim_transmit <= '1';
+        wait for 10 * c_BIT_PERIOD;
+        
+        -- stop transmitting
+        sim_transmit <= '0';
+        
+    end process;
     
     sim_rst <= '0';
---    sim_rst <= '1', '0' after 10ns;
     
---    process begin
---        -- wait for complete reception 
---        wait until r_receiver = '0';
---        for ii in 0 to 7 loop
---          wait for c_BIT_PERIOD;
---        end loop; 
-        
---        -- only after reception, transmit data
---        sim_transmit <= '1';
---        for ii in 0 to 9 loop
---          wait for c_BIT_PERIOD;
---        end loop; 
---        sim_transmit <= '0';
-        
---    end process;
-    
-
 end Behavioral;

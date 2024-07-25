@@ -20,7 +20,8 @@ entity receiver is
     i_Clk       : in  std_logic;
     i_RX_Serial : in  std_logic;
     o_RX_DV     : out std_logic;
-    o_RX_Byte   : out std_logic_vector(7 downto 0)
+    o_RX_Byte   : out std_logic_vector(7 downto 0);
+    receiving : out std_logic
     );
 end receiver;
  
@@ -34,6 +35,7 @@ architecture behavioral of receiver is
   signal r_RX_Data_R : std_logic := '0';
   signal r_RX_Data   : std_logic := '0';
   constant g_CLKS_PER_BIT : integer := 10416;
+  signal sim_receive : std_logic := '0';
    
   signal r_Clk_Count : integer range 0 to g_CLKS_PER_BIT-1 := 0;
   signal r_Bit_Index : integer range 0 to 7 := 0;  -- 8 Bits Total
@@ -62,9 +64,11 @@ begin
           r_RX_DV     <= '0';
           r_Clk_Count <= 0;
           r_Bit_Index <= 0;
+          sim_receive <= '0';
  
           if r_RX_Data = '0' then       -- Start bit detected
             r_SM_Main <= s_RX_Start_Bit;
+            sim_receive <= '1';
           else
             r_SM_Main <= s_Idle;
           end if;
@@ -126,5 +130,6 @@ begin
  
   o_RX_DV   <= r_RX_DV;
   o_RX_Byte <= r_RX_Byte;
+  receiving <= sim_receive;
    
 end behavioral;

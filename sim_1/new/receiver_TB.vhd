@@ -41,7 +41,8 @@ architecture Behavioral of receiver_TB is
         i_Clk       : in  std_logic;
         i_RX_Serial : in  std_logic;
         o_RX_DV     : out std_logic;
-        o_RX_Byte   : out std_logic_vector(7 downto 0)
+        o_RX_Byte   : out std_logic_vector(7 downto 0);
+        receiving : out std_logic
         );
     end component;
     signal sim_clk :std_logic := '0';
@@ -77,7 +78,8 @@ begin
     i_Clk=> sim_clk,
     i_RX_Serial => sim_rx,
     o_RX_DV     => open,
-    o_RX_Byte   => w_RX_Byte
+    o_RX_Byte   => w_RX_Byte,
+    receiving => open
 );
     sim_clk <= not sim_clk after 5ns; 
     
@@ -94,6 +96,8 @@ begin
     else 
       report "Test Failed - Incorrect Byte Received" severity note;
     end if;
+    
+    wait for 3 sec;
 
 --    assert false report "Tests Complete" severity failure;
     
